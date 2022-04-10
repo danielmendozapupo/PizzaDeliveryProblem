@@ -64,29 +64,22 @@ def matrixOps(myList, point):
 if __name__ == '__main__':
     with open("PizzaDeliveryInput.txt") as file:
         mystr = file.readline()
-    # mystr = '^^<<v<<v><v^^<><>^^<v<v^>>^^^><^>v^>v><><><<vv^^'
-    dgoat = ''.join([mystr[i] for i in range(1, len(mystr), 2)])
-    dguy = ''.join([mystr[i] for i in range(0, len(mystr), 2)])
     print(mystr)
-    print(f"Delivery guy: {dguy}")
-    print(f"Delivery goat: {dgoat}")
     deliveryList = [[0 for x in range(len(mystr))] for y in range(len(mystr))]
     start_row = len(mystr) // 2
     start_col = len(mystr) // 2
     counter = Counter()
 
+    # Starting point where the goat and the delivery guy delivered the first Pizza
     with concurrent.futures.ThreadPoolExecutor() as executor:
         results = [executor.submit(matrixOps, deliveryList, Point(start_row, start_col)) for _ in range(2)]
-        # results = [executor.submit(setInitialvalueMtrx, deliveryList, start_row, start_col) for _ in range(2)]
 
-    dguyPath = runDeliveries(Point(start_row, start_col))
-    dgoatPath = runDeliveries(Point(start_row, start_col))
+        dguyPath = runDeliveries(Point(start_row, start_col))
+        dgoatPath = runDeliveries(Point(start_row, start_col))
 
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        executor.submit(dgoatPath.deliverypath, deliveryList, dgoat)
-        executor.submit(dguyPath.deliverypath, deliveryList, dguy)
+        # From here both the goat and the delivery guy go to their own path
+        executor.submit(dgoatPath.deliverypath, deliveryList, ''.join([mystr[i] for i in range(1, len(mystr), 2)]))
+        executor.submit(dguyPath.deliverypath, deliveryList, ''.join([mystr[i] for i in range(0, len(mystr), 2)]))
 
-    # for elem in deliveryList:
-    #     print(elem, end="\n")
-    print(counter)
+    # print(counter)
     print(f"The number of houses receives at least one pizza: {counter[1]}")
