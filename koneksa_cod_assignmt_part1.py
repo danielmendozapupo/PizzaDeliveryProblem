@@ -1,6 +1,7 @@
 from collections import Counter
 import concurrent.futures
 
+
 class Point:
     def __init__(self, x=None, y=None, value=0):
         self.x = x
@@ -63,6 +64,11 @@ def matrixOps(myList, point):
 if __name__ == '__main__':
     with open("PizzaDeliveryInput.txt") as file:
         mystr = file.readline()
+
+    # Cleaning the string from unwanted characters
+    mystr = ''.join(i for i in mystr if i in ['^', 'v', '<', '>'])
+
+    print(mystr)
     deliveryList = [[0 for x in range(len(mystr))] for y in range(len(mystr))]
     start_row = len(mystr) // 2
     start_col = len(mystr) // 2
@@ -71,7 +77,5 @@ if __name__ == '__main__':
     with concurrent.futures.ThreadPoolExecutor() as executor:
         dguyPath = runDeliveries(Point(start_row, start_col))
         executor.submit(dguyPath.deliverypath, deliveryList, mystr)
-
-    print(counter)
 
     print(f"The number of houses receives at least one pizza: {counter[1]}")
