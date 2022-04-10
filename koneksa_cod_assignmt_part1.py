@@ -68,7 +68,6 @@ if __name__ == '__main__':
     # Cleaning the string from unwanted characters
     mystr = ''.join(i for i in mystr if i in ['^', 'v', '<', '>'])
 
-    print(mystr)
     deliveryList = [[0 for x in range(len(mystr))] for y in range(len(mystr))]
     start_row = len(mystr) // 2
     start_col = len(mystr) // 2
