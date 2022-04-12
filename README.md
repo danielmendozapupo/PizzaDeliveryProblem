@@ -1,4 +1,4 @@
-# PizzaDeliveryProblem
+# PizzaDeliveryProblem TODO: Architectural structure, how it works, and unit test
 # Pizza Delivery
 ## Part 1
 A delivery person is delivering pizzas to an infinite two-dimensional grid of houses. She begins by delivering a pizza to the house at her starting location; a dispatcher then calls via radio and tells her where to move next. Moves are always exactly one house to the north (`^`), south (`v`), east (`>`), or west (`<`). After each move, she delivers a pizza to the house at her new location. The dispatcher has been a little spacey lately, so she sometimes ends up delivering more than one pizza to the same house.
