@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     # Starting point where the goat and the delivery guy delivered the first Pizza
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        results = [executor.submit(matrixOps, deliveryList, Point(start_row, start_col)) for _ in range(2)]
+        # results = [executor.submit(matrixOps, deliveryList, Point(start_row, start_col)) for _ in range(2)]
 
         dguyPath = runDeliveries(Point(start_row, start_col))
         dgoatPath = runDeliveries(Point(start_row, start_col))
